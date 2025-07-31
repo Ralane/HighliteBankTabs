@@ -24,6 +24,16 @@ export default class ExamplePlugin extends Plugin {
             value: false,
             callback: () => {},
         }
+
+        this.settings.hideFromAll = {
+            text: 'Hide from All tab when in other tab',
+            type: SettingsTypes.checkbox,
+            value: true,
+            callback: () => {
+                this.removeTabBox();
+                this.injectTabBox();
+            },
+        }
     }
 
     start(): void {
@@ -135,16 +145,16 @@ export default class ExamplePlugin extends Plugin {
   float: left;
   // border: solid 2px;
   // border-color: rgb(188, 188, 188);
-  padding: 8px 12px;
+  padding: 8px 8px;
   transition: 0.3s;
-  background-color: rgb(130, 130, 130);
+  background-color: rgb(70, 70, 70);
   width: min-content;
   min-width: 60px;
 }
 
 /* Change background color of buttons on hover */
 .bank-tab-button:hover {
-  background-color: rgb(170, 170, 170);
+  background-color: rgb(120, 120, 120);
   // border: solid 2px;
   // border-color: rgb(211, 211, 211);
 }
@@ -155,7 +165,7 @@ export default class ExamplePlugin extends Plugin {
 
 /* Create an active/current tablink class */
 .active {
-  background-color: rgb(180, 180, 200) !important;
+  background-color: rgb(135, 135, 135) !important;
   // border: solid 2px !important;
   // border-color: rgb(222, 222, 222) !important;
 }
@@ -287,7 +297,8 @@ export default class ExamplePlugin extends Plugin {
                 this.data.tabGroups = JSON.stringify(tabJsonTmp);
 
                 const query = tabJsonTmp[this.selectedTab];
-                this.lastQuery = query; // Store the last query             
+                this.lastQuery = query; // Store the last query   
+                this.highlightBankQuery(query);          
             });
 
 
@@ -300,7 +311,7 @@ export default class ExamplePlugin extends Plugin {
         input.classList.add('bank-tab-edit-input');
         input.classList.add('hs-text-input');
         input.style.width = '120px'; // Slightly more compact
-        input.style.padding = '8px 12px';
+        input.style.padding = '8px 8px';
         input.style.outline = 'none';
         input.style.float = 'right';
         // input.value = this.settings.memory.value ? this.lastQuery : '';
@@ -391,7 +402,7 @@ export default class ExamplePlugin extends Plugin {
         );
 
         // If query is *, show all items
-        if (query && query.some((s) => s === '*')) {
+        if (query && query.some((s) => s === '*') && !this.settings.hideFromAll.value) {
             itemElements.forEach(el => {
                 (el as HTMLElement).style.display = '';
             });
@@ -421,10 +432,33 @@ export default class ExamplePlugin extends Plugin {
                   `Item ${bankItem._id}`
                 : `Item ${bankItem._id}`;
 
-            if (query.some((q) => itemName.toLowerCase() === q.trim().toLowerCase() || `${itemDef._id}` === q.trim().toLowerCase())) {
-                (el as HTMLElement).style.display = '';
+            // Handle case for mutually exclusive ALL tab
+            if (query && query.some((s) => s === '*') && this.settings.hideFromAll.value) {
+
+                        
+                let tabJson = JSON.parse(`${this.data.tabGroups}`);
+
+                let isInOtherTab = false;
+                Object.keys(tabJson).forEach((key) => {
+                    if(tabJson[key].some((q) => itemName.toLowerCase() === q.trim().toLowerCase() || `${itemDef._id}` === q.trim().toLowerCase())) {
+                        isInOtherTab = true;
+                    }    
+                }
+                );
+
+                if(isInOtherTab) {
+                    (el as HTMLElement).style.display = 'none';
+                } else {
+                    (el as HTMLElement).style.display = '';
+                }
+
+
             } else {
-                (el as HTMLElement).style.display = 'none';
+                if (query.some((q) => itemName.toLowerCase() === q.trim().toLowerCase() || `${itemDef._id}` === q.trim().toLowerCase())) {
+                    (el as HTMLElement).style.display = '';
+                } else {
+                    (el as HTMLElement).style.display = 'none';
+                }
             }
         });
     }
