@@ -290,7 +290,11 @@ export default class ExamplePlugin extends Plugin {
 
                 })
                 
-                tabJsonTmp[key] = [...(tabJsonTmp[key]), `${itemId}`];
+                if(key !== 'All') {
+                    tabJsonTmp[key] = [...(tabJsonTmp[key]), `${itemId}`];
+                } else {
+                    tabJsonTmp[key] = ['*'];
+                }
 
                 // this.log("New JSON: " + JSON.stringify(tabJsonTmp));
 
@@ -324,7 +328,7 @@ export default class ExamplePlugin extends Plugin {
 
             if(e.key === 'Enter') {
 
-                if(!input.value) {
+                if(!input.value || input.value === "All") {
                     return;
                 }
                 
