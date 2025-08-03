@@ -340,6 +340,10 @@ export default class ExamplePlugin extends Plugin {
                     tabJsonNew[input.value] = [];
                 }
 
+                if(input.value === this.selectedTab) {
+                    this.selectedTab = 'All';
+                }
+
                 this.data.tabGroups = JSON.stringify(tabJsonNew);
                 input.value = "";
 
