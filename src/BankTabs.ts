@@ -34,6 +34,17 @@ export default class ExamplePlugin extends Plugin {
                 this.injectTabBox();
             },
         }
+
+        this.settings.hideFromAll = {
+            text: 'Factory Reset (Click to clear all saved layouts)',
+            type: SettingsTypes.checkbox,
+            value: false,
+            callback: () => {
+                this.data.tabGroups = this.defaultTabGroups;
+                this.removeTabBox();
+                this.injectTabBox();
+            },
+        }
     }
 
     start(): void {
