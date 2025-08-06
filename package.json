@@ -1,16 +1,31 @@
 {
-  "name": "BankTabs",
-  "packageManager": "yarn@4.9.1",
-  "engines": {
-    "node": ">=22.0.0"
-  },
-  "scripts": {
-    "build": "node build.mjs"
-  },
-  "main": "src/BankTabs.ts",
-  "devDependencies": {
-    "@highlite/plugin-api": "^1.0.13",
-    "esbuild": "^0.25.8",
-    "typescript": "^5.8.3"
-  }
+    "name": "BankTabs",
+    "packageManager": "yarn@4.9.1",
+    "engines": {
+        "node": ">=22.0.0"
+    },
+    "scripts": {
+        "build": "node build.mjs",
+        "prepare": "husky"
+    },
+    "main": "src/BankTabs.ts",
+    "devDependencies": {
+        "@eslint/css": "^0.10.0",
+        "@eslint/js": "^9.32.0",
+        "@eslint/json": "^0.13.1",
+        "@eslint/markdown": "^7.1.0",
+        "@highlite/plugin-api": "^1.0.13",
+        "esbuild": "^0.25.8",
+        "eslint": "^9.32.0",
+        "globals": "^16.3.0",
+        "husky": "^9.1.7",
+        "jiti": "^2.5.1",
+        "lint-staged": "^16.1.4",
+        "prettier": "3.6.2",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.39.0"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
+    }
 }

@@ -15,16 +15,17 @@ A template repository for creating plugins for the HighLite client. This templat
 ### Installation
 
 1. **Use this template**: Click the "Use this template" button on GitHub to create a new repository based on this template
-2. **Clone your new repository**: 
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_PLUGIN_NAME.git
-   cd YOUR_PLUGIN_NAME
-   ```
+2. **Clone your new repository**:
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/YOUR_PLUGIN_NAME.git
+    cd YOUR_PLUGIN_NAME
+    ```
 3. **Install dependencies**:
 
 ```bash
 yarn install
 ```
+
 ### Development
 
 To build the plugin in development mode with file watching:
@@ -72,12 +73,12 @@ The main plugin class extends the base `Plugin` class from `@highlite/plugin-api
 ```typescript
 class ExamplePlugin extends Plugin {
     pluginName = "ExamplePlugin";
-    author: string = "Your Name";  // Update this with your name
-    
+    author: string = "Your Name"; // Update this with your name
+
     // Plugin lifecycle methods
-    init(): void { }
-    start(): void { }
-    stop(): void { }
+    init(): void {}
+    start(): void {}
+    stop(): void {}
 }
 ```
 
@@ -115,7 +116,7 @@ document.getElementById("app")!.innerHTML = htmlContent;
 import styles from "../resources/css/base.css";
 
 // Inject styles into the document
-const styleElement = document.createElement('style');
+const styleElement = document.createElement("style");
 styleElement.textContent = styles;
 document.head.appendChild(styleElement);
 ```
@@ -126,7 +127,7 @@ document.head.appendChild(styleElement);
 import imageSrc from "../resources/images/image.png";
 
 // Use the image source
-const img = document.createElement('img');
+const img = document.createElement("img");
 img.src = imageSrc;
 ```
 
@@ -158,10 +159,10 @@ The `types.d.ts` file provides TypeScript support for importing static resources
 To customize this template for your own plugin:
 
 1. **Rename your plugin**: Update the `pluginName` and `author` properties in `src/ExamplePlugin.ts`
-2. **Update package.json**: 
-   - Change the `name` field to match your plugin name (e.g., `"YourPluginName"`)
-   - Update the `main` field if you rename the main TypeScript file (e.g., `"src/YourPluginName.ts"`)
-   - Rerun `yarn install` to make the worksapce properly recognize the new package name
+2. **Update package.json**:
+    - Change the `name` field to match your plugin name (e.g., `"YourPluginName"`)
+    - Update the `main` field if you rename the main TypeScript file (e.g., `"src/YourPluginName.ts"`)
+    - Rerun `yarn install` to make the worksapce properly recognize the new package name
 3. **Replace the HTML content** in `resources/html/html.html`
 4. **Modify styles** in `resources/css/base.css`
 5. **Add your own images and audio files** to the respective directories
@@ -175,23 +176,25 @@ Testing your plugin locally is essential before publishing to the Plugin Hub. Hi
 ### Local Testing Setup
 
 1. **Clone HighLiteDesktop**:
-   ```bash
-   git clone https://github.com/Highl1te/HighLiteDesktop.git
-   cd HighLiteDesktop
-   ```
+
+    ```bash
+    git clone https://github.com/Highl1te/HighLiteDesktop.git
+    cd HighLiteDesktop
+    ```
 
 2. **Build your plugin**:
    Navigate back to your plugin directory and build it:
-   ```bash
-   cd /path/to/your/plugin
-   yarn build
-   ```
+
+    ```bash
+    cd /path/to/your/plugin
+    yarn build
+    ```
 
 3. **Copy the built plugin**:
    Copy your built plugin file to the HighLite plugins directory:
-   ```bash
-   cp dist/ExamplePlugin.js /path/to/HighLiteDesktop/src/renderer/client/plugins/
-   ```
+    ```bash
+    cp dist/ExamplePlugin.js /path/to/HighLiteDesktop/src/renderer/client/plugins/
+    ```
 
 ### Testing Guidelines
 
