@@ -1,6 +1,6 @@
 import { Plugin, SettingsTypes } from "@highlite/plugin-api";
 
-export default class ExamplePlugin extends Plugin {
+export default class BankTabs extends Plugin {
     pluginName = "Bank Tabs";
     author = "0rangeYouGlad";
 
