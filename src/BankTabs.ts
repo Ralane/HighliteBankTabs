@@ -450,7 +450,12 @@ export default class BankTabs extends Plugin {
 
                         if (Object.keys(tabJsonNew).includes(key)) {
                             tabJsonNew[key] = undefined;
-                            this.data.savedTabWidths[key] = undefined;
+                        }
+                        this.data.savedTabWidths[key] = undefined;
+                        const tabOrderingIndex =
+                            this.data.tabOrdering.indexOf(key);
+                        if (tabOrderingIndex > -1) {
+                            this.data.tabOrdering.splice(tabOrderingIndex, 1);
                         }
 
                         this.data.tabGroups = JSON.stringify(tabJsonNew);
@@ -618,6 +623,12 @@ export default class BankTabs extends Plugin {
                     if (Object.keys(tabJsonNew).includes(input.value)) {
                         tabJsonNew[input.value] = undefined;
                         this.data.savedTabWidths[input.value] = undefined;
+                        const tabOrderingIndex = this.data.tabOrdering.indexOf(
+                            input.value,
+                        );
+                        if (tabOrderingIndex > -1) {
+                            this.data.tabOrdering.splice(tabOrderingIndex, 1);
+                        }
                     } else {
                         tabJsonNew[input.value] = [];
                     }
