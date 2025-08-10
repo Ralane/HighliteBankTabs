@@ -133,19 +133,6 @@ export default class BankTabs extends Plugin {
                 this.updateTab();
             },
         };
-
-        this.settings.factoryReset = {
-            text: "Factory Reset (Click to clear all saved layouts)",
-            type: SettingsTypes.checkbox,
-            value: false,
-            callback: () => {
-                this.data.tabGroups = this.defaultTabGroups;
-                this.data.savedTabWidths = {};
-                this.removeTabBox();
-                this.injectTabBox();
-                this.updateTab();
-            },
-        };
     }
 
     start(): void {
