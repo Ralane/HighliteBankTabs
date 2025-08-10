@@ -787,6 +787,7 @@ export default class BankTabs extends Plugin {
                 }
             } else {
                 if (
+                    query &&
                     query.some(
                         (q) =>
                             itemName.toLowerCase() === q.trim().toLowerCase() ||
