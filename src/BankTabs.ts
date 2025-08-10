@@ -60,7 +60,7 @@ export default class BankTabs extends Plugin {
         this.settings.allowResize = {
             text: "Resizeable Tabs",
             type: SettingsTypes.checkbox,
-            value: true,
+            value: false,
             callback: () => {
                 this.removeTabBox();
                 this.injectTabBox();
@@ -82,7 +82,7 @@ export default class BankTabs extends Plugin {
         this.settings.showTabReordering = {
             text: "Show Reordering Controls",
             type: SettingsTypes.checkbox,
-            value: true,
+            value: false,
             callback: () => {
                 this.removeTabBox();
                 this.injectTabBox();
@@ -406,6 +406,7 @@ export default class BankTabs extends Plugin {
 
             if (this.settings.showTabReordering.value) {
                 const keyIndex = this.data.tabOrdering.indexOf(key);
+
                 if (keyIndex > 0) {
                     const inputLeftButton = document.createElement("button");
                     inputLeftButton.innerHTML = "←";
