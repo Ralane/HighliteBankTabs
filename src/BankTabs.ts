@@ -744,15 +744,16 @@ export default class BankTabs extends Plugin {
 
             // Handle case for mutually exclusive ALL tab
             if (
+                this.settings.hideFromAll.value &&
                 query &&
-                query.some((s) => s === "*") &&
-                this.settings.hideFromAll.value
+                query.some((s) => s === "*")
             ) {
                 let tabJson = JSON.parse(`${this.data.tabGroups}`);
 
                 let isInOtherTab = false;
                 Object.keys(tabJson).forEach((key) => {
                     if (
+                        tabJson[key] &&
                         tabJson[key].some(
                             (q) =>
                                 itemName.toLowerCase() ===
