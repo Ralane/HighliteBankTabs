@@ -133,6 +133,28 @@ export default class BankTabs extends Plugin {
                 this.updateTab();
             },
         };
+
+        this.settings.bankTabPaddingWidth = {
+            text: "Tab Padding Width",
+            type: SettingsTypes.range,
+            value: 8,
+            callback: () => {
+                this.removeTabBox();
+                this.injectTabBox();
+                this.updateTab();
+            },
+        };
+
+        this.settings.bankTabPaddingHeight = {
+            text: "Tab Padding Height",
+            type: SettingsTypes.range,
+            value: 8,
+            callback: () => {
+                this.removeTabBox();
+                this.injectTabBox();
+                this.updateTab();
+            },
+        };
     }
 
     start(): void {
@@ -256,7 +278,7 @@ export default class BankTabs extends Plugin {
 /* Style the buttons that are used to open the tab content */
 .bank-tab-button {
   float: left;
-  padding: 8px 8px;
+  padding: ${this.settings.bankTabPaddingHeight.value}px ${this.settings.bankTabPaddingWidth.value}px;
   transition: 0.3s;
   background-color: ${this.settings.bankTabColor.value};
 }
@@ -354,6 +376,7 @@ export default class BankTabs extends Plugin {
             }
             inputDiv.style.overflow = "auto";
             inputDiv.style.minWidth = "60px";
+            inputDiv.classList.add("hs-text--white");
 
             if (this.data.savedTabWidths && this.data.savedTabWidths[key]) {
                 inputDiv.style.width = `${this.data.savedTabWidths[key]}px`;
@@ -589,7 +612,7 @@ export default class BankTabs extends Plugin {
             input.classList.add("bank-tab-edit-input");
             input.classList.add("hs-text-input");
             input.style.width = "120px"; // Slightly more compact
-            input.style.padding = "8px 8px";
+            input.style.padding = `${this.settings.bankTabPaddingHeight.value}px ${this.settings.bankTabPaddingWidth.value}px`;
             input.style.outline = "none";
             input.style.float = "right";
             // input.value = this.settings.memory.value ? this.lastQuery : '';
