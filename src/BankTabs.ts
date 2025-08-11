@@ -407,11 +407,17 @@ export default class BankTabs extends Plugin {
             if (this.settings.showTabReordering.value) {
                 const keyIndex = this.data.tabOrdering.indexOf(key);
 
+                const reorderContainer = document.createElement("div");
+                reorderContainer.style.backgroundColor = `${this.settings.bankTabColor.value}`;
+                reorderContainer.style.width = "auto";
+                reorderContainer.style.display = "flex";
+
                 if (keyIndex > 0) {
                     const inputLeftButton = document.createElement("button");
-                    inputLeftButton.innerHTML = "←";
-                    inputLeftButton.style.background = "blue";
-                    inputLeftButton.style.maxWidth = "20px";
+                    inputLeftButton.innerText = "<";
+                    inputLeftButton.style.backgroundColor = `${this.settings.bankTabColorHovered.value}`;
+                    inputLeftButton.style.minWidth = "20px";
+                    inputLeftButton.style.flexGrow = "1";
                     // inputXButton.style.position = "fixed";
 
                     inputLeftButton.addEventListener("click", (e) => {
@@ -426,14 +432,15 @@ export default class BankTabs extends Plugin {
                         this.injectTabBox();
                     });
 
-                    inputDiv.appendChild(inputLeftButton);
+                    reorderContainer.appendChild(inputLeftButton);
                 }
 
                 if (keyIndex < this.data.tabOrdering.length - 1) {
                     const inputRightButton = document.createElement("button");
-                    inputRightButton.innerHTML = "→";
-                    inputRightButton.style.background = "blue";
-                    inputRightButton.style.maxWidth = "20px";
+                    inputRightButton.innerText = ">";
+                    inputRightButton.style.backgroundColor = `${this.settings.bankTabColorHovered.value}`;
+                    inputRightButton.style.minWidth = "20px";
+                    inputRightButton.style.flexGrow = "1";
 
                     inputRightButton.addEventListener("click", (e) => {
                         var temp =
@@ -447,14 +454,17 @@ export default class BankTabs extends Plugin {
                         this.injectTabBox();
                     });
 
-                    inputDiv.appendChild(inputRightButton);
+                    reorderContainer.appendChild(inputRightButton);
                 }
 
                 if (key !== "All") {
                     const inputXButton = document.createElement("button");
-                    inputXButton.innerHTML = "X";
+                    inputXButton.innerText = "X";
+                    inputXButton.style.minWidth = "20px";
                     inputXButton.style.maxWidth = "20px";
                     inputXButton.style.background = "red";
+                    inputXButton.style.float = "right";
+                    inputXButton.style.flexGrow = "0";
 
                     inputXButton.addEventListener("click", (e) => {
                         let tabJsonNew = JSON.parse(`${this.data.tabGroups}`);
@@ -473,8 +483,10 @@ export default class BankTabs extends Plugin {
                         this.removeTabBox();
                         this.injectTabBox();
                     });
-                    inputDiv.appendChild(inputXButton);
+                    reorderContainer.appendChild(inputXButton);
                 }
+
+                inputDiv.appendChild(reorderContainer);
             }
 
             inputDiv.appendChild(input);
