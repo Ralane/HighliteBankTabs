@@ -24,7 +24,7 @@ await esbuild.build({
     outdir: "dist",
     format: "esm",
     plugins: [CSSMinifyPlugin],
-    external: ["@babylonjs/core", "@highlite/plugin-api"],
+    external: ["@babylonjs/core", "@highlite/core"],
     loader: {
         ".html": "text",
         ".png": "dataurl",

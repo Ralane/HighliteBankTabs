@@ -1,4 +1,4 @@
-import { Plugin, SettingsTypes } from "@highlite/plugin-api";
+import { Plugin, SettingsTypes } from "@highlite/core";
 
 export default class BankTabs extends Plugin {
     pluginName = "Bank Tabs";
@@ -138,6 +138,8 @@ export default class BankTabs extends Plugin {
             text: "Tab Padding Width",
             type: SettingsTypes.range,
             value: 8,
+            min: 0,
+            max: 32,
             callback: () => {
                 this.removeTabBox();
                 this.injectTabBox();
@@ -149,6 +151,8 @@ export default class BankTabs extends Plugin {
             text: "Tab Padding Height",
             type: SettingsTypes.range,
             value: 8,
+            min: 0,
+            max: 32,
             callback: () => {
                 this.removeTabBox();
                 this.injectTabBox();
